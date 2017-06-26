@@ -583,6 +583,23 @@
       ],
       "response": null
     },
+    "teamLeave": {
+      "request": [
+        {
+          "name": "sessionID",
+          "type": "int"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "permanence",
+          "type": "boolean"
+        }
+      ],
+      "response": null
+    },
     "teamEditMember": {
       "request": [
         {
