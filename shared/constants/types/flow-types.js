@@ -7043,7 +7043,7 @@ export type teamsTeamGetRpcParam = Exact<{
 
 export type teamsTeamLeaveRpcParam = Exact<{
   name: string,
-  permanence: boolean
+  permanent: boolean
 }>
 
 export type teamsTeamRemoveMemberRpcParam = Exact<{

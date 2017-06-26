@@ -594,7 +594,7 @@
           "type": "string"
         },
         {
-          "name": "permanence",
+          "name": "permanent",
           "type": "boolean"
         }
       ],
