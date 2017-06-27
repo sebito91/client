@@ -5929,7 +5929,7 @@ export type TeamSigChainState = {
   userLog: {[key: string]: ?Array<UserLogPoint>},
   subteamLog: {[key: string]: ?Array<SubteamLogPoint>},
   perTeamKeys: {[key: string]: PerTeamKey},
-  stubbedTypes: {[key: string]: boolean},
+  stubbedLinks: {[key: string]: boolean},
 }
 
 export type Test = {
