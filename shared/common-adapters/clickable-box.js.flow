@@ -14,6 +14,11 @@ export type Props = {|
   feedback?: boolean,
   // mobile only
   activeOpacity?: number,
+  // desktop only
+  onMouseEnter?: ?() => void,
+  onMouseLeave?: ?() => void,
+  onMouseDown?: ?() => void,
+  onMouseUp?: ?() => void,
 |}
 
 declare export default class ClickableBox extends Component<void, Props, void> {}

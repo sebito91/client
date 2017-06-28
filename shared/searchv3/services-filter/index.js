@@ -2,8 +2,8 @@
 // The filter bar for search. Lets you select a search provider
 import * as Constants from '../../constants/searchv3'
 import React, {Component} from 'react'
-import {Box, Icon, ClickableBox} from '../../common-adapters'
-import {globalColors, globalStyles} from '../../styles'
+import {Box, Icon, ClickableBox, Text} from '../../common-adapters'
+import {globalStyles, globalColors, transition} from '../../styles'
 import {isMobile} from '../../constants/platform'
 
 import type {IconType} from '../../common-adapters/icon'
@@ -53,8 +53,8 @@ const Service = ({service, selected, hovering, onHover, onSelect}) => {
 
   const boxProps = isMobile
     ? {
-        onPressIn: () => onHover(service, true),
-        onPressOut: () => onHover(service, false),
+        onPressIn: () => onHover(true),
+        onPressOut: () => onHover(false),
         style: {
           ...globalStyles.flexBoxCenter,
           backgroundColor,
@@ -64,8 +64,8 @@ const Service = ({service, selected, hovering, onHover, onSelect}) => {
         },
       }
     : {
-        onMouseEnter: () => onHover(service, true),
-        onMouseLeave: () => onHover(service, false),
+        onMouseEnter: () => onHover(true),
+        onMouseLeave: () => onHover(false),
         style: {
           ...globalStyles.flexBoxCenter,
           backgroundColor,
@@ -78,6 +78,15 @@ const Service = ({service, selected, hovering, onHover, onSelect}) => {
   return (
     <ClickableBox key={service} onClick={() => onSelect(service)} {...boxProps}>
       <Icon type={selected ? selectedIconMap[service] : unselectedIconMap[service]} />
+      <Text
+        type="BodySmall"
+        style={{
+          ...serviceTooltipStyle,
+          opacity: hovering ? 1 : 0,
+        }}
+      >
+        {service}
+      </Text>
     </ClickableBox>
   )
 }
@@ -109,13 +118,29 @@ class Filter extends Component<void, Props, {hoveredService: ?Constants.Service}
             service={service}
             selected={service === this.props.selectedService}
             hovering={service === this.state.hoveredService}
-            onHover={this._hoverChanged}
+            onHover={isHovering => this._hoverChanged(service, isHovering)}
             onSelect={this._selectService}
           />
         ))}
       </Box>
     )
   }
+}
+
+const serviceTooltipStyle = {
+  ...transition('opacity'),
+  backgroundColor: globalColors.black_40,
+  borderBottom: '2px solid white',
+  borderRadius: 65,
+  color: globalColors.white,
+  cursor: 'default',
+  left: -16,
+  lineHeight: '22px',
+  minHeight: 22,
+  minWidth: 86,
+  position: 'absolute',
+  textAlign: 'center',
+  top: -24,
 }
 
 export default Filter
